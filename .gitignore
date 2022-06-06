@@ -1,3 +1,8 @@
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
 #此文件是铁定不加入add git问题的
 /node_modules/
 .DS_Store
