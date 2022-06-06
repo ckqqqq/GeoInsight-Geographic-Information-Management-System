@@ -18,9 +18,13 @@
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
+CREATE DATABASE IF NOT EXISTS l_user DEFAULT CHARACTER SET utf8;
+# SHOW DATABASE '';
+USE l_user;
 -- ----------------------------
 -- Table structure for user
 -- ----------------------------
+
 # DROP TABLE IF EXISTS `user`;
 # CREATE TABLE `user`  (
 #                          `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '编号',
@@ -50,7 +54,7 @@ CREATE TABLE `user`  (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-#数据库是生成的，数据是我随机生成的，这个后端mybatisok 的，然后下一周的任务就是把咱们的后端对接上，咱们的后端又改了一版
+-- #数据库是生成的，数据是我随机生成的，这个后端mybatisok 的，然后下一周的任务就是把咱们的后端对接上，咱们的后端又改了一版
 INSERT INTO `user` VALUES (0, '德玛西亚爆发疫情', '自然灾害', 'E 117.87349561998104', 'S 79.17248239986428', '1', '发放人道主义物资','2022-05-26 00:25:20');
 INSERT INTO `user` VALUES (1, '致远星遭遇恐怖分子袭击', '突发事件', 'E 73.11757465406474', 'S 73.4384393765733', '0', '发放人道主义物资','2022-05-26 00:25:20');
 INSERT INTO `user` VALUES (2, '霍格沃兹发生垮塌事故，教学工作停滞', '人为事故', 'W 113.52524175543662', 'S 75.69006945656373', '1', '发放人道主义物资','2022-05-26 00:25:20');
