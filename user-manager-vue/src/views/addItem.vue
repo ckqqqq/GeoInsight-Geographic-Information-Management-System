@@ -6,8 +6,8 @@
                label-width="100px"
                class="demo-ruleForm">
 
-        <el-form-item label="名称" prop="username">
-          <el-input v-model="userList.username"></el-input>
+        <el-form-item label="名称" prop="itemname">
+          <el-input v-model="userList.itemname"></el-input>
         </el-form-item>
 
         <el-form-item label="类别" prop="typename">
@@ -57,7 +57,7 @@ export default {
       status: false,
       // 用户信息表单
       userList: {
-        username: '',
+        itemname: '',
         typename: '',
         latitude: '',
         longitude: '',
@@ -66,7 +66,7 @@ export default {
       },
       // 校验规则，详细看 element ui 官方教程
       rules: {
-        username: [
+        itemname: [
           { required: true, message: '请输入名称', trigger: 'blur' },
         ],
         typename: [

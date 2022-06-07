@@ -14,7 +14,7 @@
             <i class="el-icon-edit-outline"></i>
             名称
           </template>
-           {{ item.username }}
+           {{ item.itemname }}
         </el-descriptions-item>
 
         <!-- 经度 -->

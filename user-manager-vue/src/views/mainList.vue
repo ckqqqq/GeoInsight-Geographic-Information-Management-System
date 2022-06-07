@@ -5,8 +5,8 @@
     <div>
      <el-form :inline="true" :model="queryParam" class="demo-form-inline" ref="queryParam">
 
-        <el-form-item label="名称" prop="username">
-          <el-input v-model="queryParam.username" placeholder="输入名称"></el-input>
+        <el-form-item label="名称" prop="itemname">
+          <el-input v-model="queryParam.itemname" placeholder="输入名称"></el-input>
         </el-form-item>
 
         <el-form-item label="类别" prop="typename">
@@ -71,7 +71,7 @@
       <el-table-column label="名称"
                        width="150">
         <template slot-scope="scope">
-          <span>{{ scope.row.username }}</span>
+          <span>{{ scope.row.itemname }}</span>
         </template>
       </el-table-column>
 
@@ -177,7 +177,7 @@ export default {
       select: [], // 选中的数据
       // 查询参数对象
       queryParam: {
-        username: '',
+        itemname: '',
         typename: '',
         longitude: '',
         finalOption: '',
