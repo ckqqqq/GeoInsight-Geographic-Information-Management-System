@@ -1,12 +1,19 @@
 package com.xiaoyuan.usermanager.controller;
 
+import com.xiaoyuan.usermanager.db.entity.Material;
 import com.xiaoyuan.usermanager.db.entity.User;
+import com.xiaoyuan.usermanager.service.FileService;
 import com.xiaoyuan.usermanager.service.UserService;
 import com.xiaoyuan.usermanager.vo.QueryParam;
 import com.xiaoyuan.usermanager.vo.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 
 /**
@@ -24,6 +31,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private FileService fileService;
 
     // 添加用户 对R本身进行操作
     @PostMapping("")
@@ -62,4 +72,26 @@ public class UserController {
     public R getUserInfo(@PathVariable(value = "id") Integer id) {
         return userService.getUserInfoById(id);
     }
+
+    @ResponseBody
+    @GetMapping("/file/download")
+    public R download(@RequestParam("id") Long id, HttpServletResponse res) throws IOException {
+        Material material = this.fileService.getMaterial(id);
+        String filename = material.getFileShortName();
+        String URI = material.getFileUri();
+        File file = new File(URI);
+        String h = URLEncoder.encode(filename, "UTF-8");
+        res.setHeader("Content-Disposition", "attachment;filename=" + h);
+        res.setHeader("Content-Type", "application/octet-stream;charset=utf-8");
+        this.fileService.download(file, res);
+        return R.ok().data("file",res);
+    }
+
+    @ResponseBody
+    @PostMapping("/file/upload")
+    public R upload(@RequestParam("file") MultipartFile file) {
+        Material ret = this.fileService.uploadFile(file);
+        return R.ok().data("file",ret);
+    }
+
 }
