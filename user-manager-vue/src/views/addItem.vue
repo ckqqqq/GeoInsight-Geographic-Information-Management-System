@@ -27,19 +27,19 @@
 
 
 
-        <el-form-item label="状态" prop="Status">
-          <!-- 单选框 -->
-          <el-select v-model="ItemList.finalOption" placeholder="请选择状态">
-            <el-option label="已处理" value="0"></el-option>
-            <el-option label="未处理" value="1"></el-option>
-          </el-select>
-        </el-form-item>
+<!--        <el-form-item label="状态" prop="Status">-->
+<!--          &lt;!&ndash; 单选框 &ndash;&gt;-->
+<!--          <el-select v-model="ItemList.finalOption" placeholder="请选择状态">-->
+<!--            <el-option label="已处理" value="0"></el-option>-->
+<!--            <el-option label="未处理" value="1"></el-option>-->
+<!--          </el-select>-->
+<!--        </el-form-item>-->
 
         <el-form-item label="描述" prop="describe">
           <el-input type="textarea" v-model="ItemList.describe"></el-input>
         </el-form-item>
           <el-form-item label="文件" prop="file">
-              <el-input icon="el-icon-document-copy"  type="file" id="fileinput" v-model="fileName" ></el-input>
+              <el-input id="fileinput" icon="el-icon-document-copy"  type="file" v-model="filename" placeholder="请选择文件"></el-input>
 <!--              <div style="border:1px solid #ccc;border-radius: 4px;">-->
 <!--                  自己写了个漂亮的按钮，点这个按钮触发下面这个input框，实现选文件-->
 <!--                  弹出选择文件的窗口-->
@@ -85,12 +85,16 @@
 
 <script>
 import Item from '../api/itemApi'
+import axios from "axios";
 
 export default {
   data() {
+
     return {
-        fileName: '',
-      // 页面状态 false->添加操作，true->编辑操作
+        // formData : "",
+        filename: '',
+        file:"",
+        // 页面状态 false->添加操作，true->编辑操作
       status: false,
       // 用户信息表单
       ItemList: {
@@ -140,16 +144,55 @@ export default {
       // !!!!!!!!!!!!!!!!!!!!注意。如果使用的input框。文件选择后的名字不是value值
       // 而是name值 document.querySelector('#fileinput').files[0].name
       checkFileSure (val) {
+          console.log("文件信息"),
+          document.querySelector('#fileinput').files[0]
           console.log(document.querySelector('#fileinput').files[0])
-          this.fileName = document.querySelector('#fileinput').files[0].name
-          console.log("文件上传成功")
+          // this.fileName = document.querySelector('#fileinput').files[0].name
+          console.log("文件上传成功"),
+          this.file=document.querySelector('#fileinput').files[0]
       },
     submitForm(formName) {
 
         // 漂亮按钮点击事件
 
       this.$refs[formName].validate((valid) => {
+          var fuck
         if (valid) {
+            console.log("文件信息 submit"),
+            console.log(this.file.name)
+            console.log(document.querySelector('#fileinput').files[0])
+            console.log("上传文件")
+            axios({
+                method: 'post',
+                url: 'http://127.0.0.1:8081/item/file/upload',
+                headers:{
+                    'Content-Type' : 'multipart/form-data'
+                },
+                data:{
+                    'file':document.querySelector('#fileinput').files[0]
+                }
+            }).then(function(response){
+               // console.log(response)
+               //  console.log(response.data)
+               //  console.log(response.data)
+                console.log("2data")
+                console.log(response.data.data)
+                console.log(response.data.data.data)
+               //  console.log(response.data.data.data)
+               //  this.finalOption=JSON.stringify(response)///作用域作用域！！@@@@@@@
+               //  fff=///作用域作用域！！@@@@@@@
+               //  console.log(fuck)
+                var fff=JSON.parse(JSON.stringify(response))//阴间玩意！史诗级大bug
+                console.log("文件id",fff.data.data.file.id)//bug
+                fuck=fff.data.data.file.id//bug
+                console.log(fuck)//bug
+            })
+            console.log("axios结束")
+            // Item.fileUpload(document.querySelector('#fileinput').files[0])
+            // Item.fileUpload(document.querySelector('#fileinput').files[0]).then(_ => {
+            //
+            // })
+            this.ItemList.finalOption=fuck
           if(this.status) {
             // 调用编辑用户接口
             Item.updateItem(this.ItemList).then(_ => {

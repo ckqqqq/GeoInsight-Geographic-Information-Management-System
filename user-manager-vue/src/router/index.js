@@ -31,11 +31,11 @@ const routes = [
         hidden: true //隐式路由 这个我不知道什么意思，哦哦哦就是以后要加的页面
 	  },
 			//第三页
-			{
-				path: "/itemInfo",
-				name: "详细信息",
-				component: () => import("../views/itemInfoList.vue")
-			},
+			// {
+			// 	path: "/itemInfo",
+			// 	name: "详细信息",
+			// 	component: () => import("../views/itemInfoList.vue")
+			// },
 			//第三页
 			{
 				path: "/map",

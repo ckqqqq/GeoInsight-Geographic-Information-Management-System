@@ -9,8 +9,8 @@
           <el-input v-model="queryParam.itemname" placeholder="输入名称"></el-input>
         </el-form-item>
 
-        <el-form-item label="类别" prop="typename">
-          <el-input v-model="queryParam.typename" placeholder="请输入类别"></el-input>
+        <el-form-item label="信息来源" prop="typename">
+          <el-input v-model="queryParam.typename" placeholder="请输入信息来源"></el-input>
         </el-form-item>
 
         <el-form-item label="经度" prop="longitude">
@@ -19,8 +19,8 @@
 
         <el-form-item label="状态" prop="finalOption">
           <el-select v-model="queryParam.finalOption" placeholder="选择状态">
-            <el-option label="已处理" value="0"></el-option>
-            <el-option label="未处理" value="1"></el-option>
+<!--            <el-option label="已处理" value="0"></el-option>-->
+<!--            <el-option label="未处理" value="1"></el-option>-->
           </el-select>
         </el-form-item>
 
@@ -75,8 +75,8 @@
         </template>
       </el-table-column>
 
-      <!-- 类别 -->
-      <el-table-column label="类别"
+      <!-- 信息来源 -->
+      <el-table-column label="信息来源"
                        width="150">
         <template slot-scope="scope">
           <span>{{ scope.row.typename }}</span>
@@ -87,7 +87,7 @@
       <el-table-column label="状态"
                        width="60">
         <template slot-scope="scope">
-          <span>{{ scope.row.finalOption ===  '0' ? '已处理' : '未处理' }}</span>
+          <span>{{ scope.row.finalOption }}</span>
         </template>
       </el-table-column>
 
@@ -125,20 +125,27 @@
 
       <el-table-column align="center"
                        label="操作"
-                       width="150">
+                       width="300">
         <template slot-scope="scope">
+            <!-- 文件下载按钮 -->
+                <el-button size="mini"
+                           type="primary"
+                           icon="el-icon-edit"
+                           @click="fileDownload(scope.row.finalOption)"
+                >文件</el-button>
           <!-- 编辑按钮 -->
           <router-link :to="'/editItem/' + scope.row.id">
             <el-button size="mini"
                        type="warning"
-                       icon="el-icon-edit"></el-button>
+                       icon="el-icon-edit"
+                       >编辑</el-button>
           </router-link>
           <!-- 删除按钮 -->
-          <el-button style="margin-left: 10px;"
+          <el-button
                      size="mini"
                      type="danger"
                      icon="el-icon-delete"
-                     @click="deleteItem(scope.row.id)"></el-button>
+                     @click="deleteItem(scope.row.id)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -160,6 +167,7 @@
 
 <script>
 import Item from '../api/itemApi'
+import axios from "axios";
 
 export default {
   data() {
@@ -186,6 +194,27 @@ export default {
     }
   },
   methods: {
+      fileDownload(fileId){
+          var my_url="http://127.0.0.1:8081/item/file/download?id="+fileId
+          console.log("fileDownload")
+          console.log(fileId)
+          axios({
+              method: 'get',
+              url: my_url,
+              headers:{
+                  'Content-Type' : 'multipart/form-data'
+              }
+
+          }).then((response)=>{
+              console.log(response)
+              const url = window.URL.createObjectURL(new Blob([response.data]));
+              const link = document.createElement('a');
+              link.href = url;
+              link.setAttribute('download', ''); //or any other extension
+              document.body.appendChild(link);
+              link.click();
+          })
+      },
     // 提交查询
     submitSearch() {
       // 调用下面的查询方法

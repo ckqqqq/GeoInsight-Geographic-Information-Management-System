@@ -1,7 +1,35 @@
 import request from '../utils/request'
-
+import axios from "axios";
+//这个是封装好的request
 export default {
+  fileUpload(file){
+    axios({
+      methods: 'post',
+      url: 'http://127.0.0.1:8081/item/file/upload',
+      headers:{
+        'Content-Type' : 'multipart/form-data'
+      },
+      params:{
+        'file':file
+      }
+    })
+  },
 
+  // fileUpload(file){
+  //   this.axios.post(
+  //       'http://127.0.0.1:8081/item/file/upload',
+  //       {
+  //         params:{
+  //           'file':file
+  //         },
+  //         headers:{
+  //           'Content-Type': 'multipart/form-data'
+  //         }
+  //       }
+  //   ).then(function(response){
+  //     console.log(response)
+  //   })
+  // },
   // 添加用户接口
   addItem(Item) {
     console.log("addItem")
