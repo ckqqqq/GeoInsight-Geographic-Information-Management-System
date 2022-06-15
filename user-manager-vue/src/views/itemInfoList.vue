@@ -1,7 +1,7 @@
 <!--这一页是那个用户信息页面，是第三页-->
 <template>
   <div class="app">
-    <div :class="index > 0 ? 'info' : ''" v-for="(item, index) in userList" :key="index">
+    <div :class="index > 0 ? 'info' : ''" v-for="(item, index) in ItemList" :key="index">
       <el-descriptions class="margin-top"
                        :title="item.typename"
                        :column="3"
@@ -71,13 +71,13 @@
 
 <script>
 // 引入接口
-import user from '../api/itemApi'
+import Item from '../api/itemApi'
 
 export default {
   data() {
     return {
       // 用户信息列表
-      userList: [],
+      ItemList: [],
       // 分页
       pageParam: {
         index: 1,
@@ -90,20 +90,20 @@ export default {
     // 切页
     handleCurrentChange(index) {
       this.pageParam.index = index
-      this.getUserList()
+      this.getItemList()
     },
-    getUserList() {
+    getItemList() {
       // 发送请求，获取用户信息列表
-      user.findUserList(this.pageParam.index, this.pageParam.size).then((res) => {
+      Item.findItemList(this.pageParam.index, this.pageParam.size).then((res) => {
         // 赋值
-        this.userList = res.data.userList
+        this.ItemList = res.data.ItemList
         // 总数赋值
         this.pageParam.total = res.data.total
       })
     }
   },
   created() {
-    this.getUserList()
+    this.getItemList()
   },
 }
 </script>

@@ -50,7 +50,7 @@
 
     <!-- 用户信息列表 -->
     <el-table ref="multipleTable"
-              :data="userList"
+              :data="ItemList"
               border
               @selection-change="handleSelectionChange"
               style="width: 100%">
@@ -61,7 +61,7 @@
 
       <!-- 编号 -->
       <el-table-column label="编号"
-                       width="50">
+                       width="200">
         <template slot-scope="scope">
           <span>{{ scope.row.id }}</span>
         </template>
@@ -138,7 +138,7 @@
                      size="mini"
                      type="danger"
                      icon="el-icon-delete"
-                     @click="deleteUser(scope.row.id)"></el-button>
+                     @click="deleteItem(scope.row.id)"></el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -159,7 +159,7 @@
 </template>
 
 <script>
-import user from '../api/itemApi'
+import Item from '../api/itemApi'
 
 export default {
   data() {
@@ -171,7 +171,7 @@ export default {
         total: 0,
       },
       // 数据
-      userList: [],
+      ItemList: [],
       // 一键删除
       more: false, // 删除按钮显示状态
       select: [], // 选中的数据
@@ -189,7 +189,7 @@ export default {
     // 提交查询
     submitSearch() {
       // 调用下面的查询方法
-      this.findUserList()
+      this.findItemList()
     },
     // 清空查询参数
     clearForm(formName) {
@@ -218,41 +218,41 @@ export default {
           ids.push(item.id)
         })
         // 调用删除多个用户的接口
-        user.deleteMoreUser(ids).then((_) => {
+        Item.deleteMoreItem(ids).then((_) => {
           this.$notify({
             title: '删除成功',
             type: 'success',
           })
-          this.findUserList()
+          this.findItemList()
         })
       })
     },
     // 切页
     handleCurrentChange(index) {
       this.pageParam.index = index
-      this.findUserList()
+      this.findItemList()
     },
     // 查询用户列表
-    findUserList() {
-      user.findUserList(this.pageParam.index, this.pageParam.size, this.queryParam).then((res) => {
-        this.userList = res.data.userList
+    findItemList() {
+      Item.findItemList(this.pageParam.index, this.pageParam.size, this.queryParam).then((res) => {
+        this.ItemList = res.data.itemList
         this.pageParam.total = res.data.total
       })
     },
     // 删除单个用户
-    deleteUser(id) {
+    deleteItem(id) {
       this.$confirm('此操作将删除改表项, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning',
       }).then(() => {
         // 调用删除接口
-        user.deleteUser(id).then((_) => {
+        Item.deleteItem(id).then((_) => {
           this.$message({
             type: 'success',
             message: '删除成功!',
           })
-          this.findUserList()
+          this.findItemList()
         })
       }).catch(() => {
         this.$message({
@@ -263,7 +263,7 @@ export default {
     },
   },
   created() {
-    this.findUserList()
+    this.findItemList()
   },
 }
 </script>

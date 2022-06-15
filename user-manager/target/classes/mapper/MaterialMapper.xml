@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace路径根据自己而定 -->
+<mapper namespace="com.myproject.manager.db.mapper.MaterialMapper">
+
+    <resultMap id="BaseResultMap" type="com.myproject.manager.db.entity.Material">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="file_short_name" jdbcType="VARCHAR" property="fileShortName"/>
+        <result column="file_full_name" jdbcType="VARCHAR" property="fileFullName"/>
+        <result column="file_type" jdbcType="VARCHAR" property="fileType"/>
+        <result column="file_uri" jdbcType="VARCHAR" property="fileUri"/>
+        <result column="file_size" jdbcType="BIGINT" property="fileSize"/>
+        <result column="publish_time" jdbcType="TIMESTAMP" property="publishTime"/>
+    </resultMap>
+
+    <insert id="insertSelective" keyColumn="id"
+            keyProperty="id" parameterType="com.myproject.manager.db.entity.Material" useGeneratedKeys="true">
+        insert into file
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="fileShortName != null">
+                file_short_name,
+            </if>
+            <if test="fileFullName != null">
+                file_full_name,
+            </if>
+            <if test="fileType != null">
+                file_type,
+            </if>
+            <if test="fileUri != null">
+                file_uri,
+            </if>
+            <if test="fileSize != null">
+                file_size,
+            </if>
+            <if test="publishTime != null">
+                publish_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="fileShortName != null">
+                #{fileShortName,jdbcType=VARCHAR},
+            </if>
+            <if test="fileFullName != null">
+                #{fileFullName,jdbcType=VARCHAR},
+            </if>
+            <if test="fileType != null">
+                #{fileType,jdbcType=VARCHAR},
+            </if>
+            <if test="fileUri != null">
+                #{fileUri,jdbcType=VARCHAR},
+            </if>
+            <if test="fileSize != null">
+                #{fileSize,jdbcType=BIGINT},
+            </if>
+            <if test="publishTime != null">
+                #{publishTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        *
+<!--        <include refid="Base_Column_List"/>-->
+        from file
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+</mapper>

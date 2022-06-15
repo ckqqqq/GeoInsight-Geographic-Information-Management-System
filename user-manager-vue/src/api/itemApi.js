@@ -3,25 +3,29 @@ import request from '../utils/request'
 export default {
 
   // 添加用户接口
-  addUser(user) {
+  addItem(Item) {
+    console.log("addItem")
     return request({
       url: '/item',
       method: 'post',
-      data: user
+      data: Item
     })
   },
 
   // 删除用户接口
-  deleteUser(id) {
+  deleteItem(id) {
+    console.log("deleteItem")
     return request({
       url: `/item/${id}`,
       method: 'delete'
     })
   },
 
+
   // 删除多个用户接口
   //传入一个vue的列表
-  deleteMoreUser(ids) {
+  deleteMoreItem(ids) {
+    console.log("deleteMoreItem")
     return request({
       url: '/item',
       method: 'delete',
@@ -30,16 +34,18 @@ export default {
   },
 
   // 编辑用户接口
-  updateUser(user) {
+  updateItem(Item) {
+    console.log("updateItem")
     return request({
       url: `/item`,
       method: 'put',
-      data: user
+      data: Item
     })
   },
 
   // 查询用户列表接口
-  findUserList(index, size, queryParam) {
+  findItemList(index, size, queryParam) {
+    console.log("findItemList")
     return request({
       url: `/item/${index}/${size}`,
       method: 'post',
@@ -48,7 +54,8 @@ export default {
   },
 
   // 根据用户编号获取用户信息接口
-  getUserInfo(id) {
+  getItemInfo(id) {
+    console.log("getItemInfo")
     return request({
       url: `/item/${id}`,
       method: 'post'

@@ -4,6 +4,7 @@ import index from '../views/index.vue'
 
 Vue.use(VueRouter)
 //注意: router似乎不能热修改
+//数据映射
 const routes = [
   {
 		path: "/",

@@ -7,13 +7,17 @@ spring:
   #在这里配置你数据库的账号啊地址啊啥的
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql:///l_user?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    url: jdbc:mysql:///project_database?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
     username: root
     password: a1047969038
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
-
+file:
+    upload:
+      dir: D:/amyprocess/Docker_Project2022/springboot_vue_mybatis
+    accesses:
+      url: D:/amyprocess/Docker_Project2022/springboot_vue_mybatis
 mybatis-plus:
   # mapper文件映射路径
   mapper-locations: classpath*:mapper/*.xml
