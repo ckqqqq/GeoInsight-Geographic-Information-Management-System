@@ -1,6 +1,6 @@
 "# SpringBoot-Vue-Mybatis-Mysql_list_view" 
 # Springboot-Vue-Mybatis-Simple-List-Template
-一个Springboot+Vue+Mybatis+mysql的一个前后端模板，主界面是一个列表,其余界面为修改界面和地图界面，具备增删改查功能
+基于软件项目管理做的，一个Springboot+Vue+Mybatis+mysql的一个前后端模板，前端摆烂，真的和大佬一起全栈开发了T_T，主界面是一个列表,其余界面为修改界面和地图界面，具备增删改查功能
 
 git https://www.cnblogs.com/schaepher/p/5561193.html
 
