@@ -40,7 +40,7 @@ const routes = [
 			{
 				path: "/map",
 				name: "地图展示",
-				// component: () => import("../views/itemInfoList.vue")
+				component: () => import("../views/map.vue")
 			}
 			//你们的工作是加页码，我目前前端只有三页你们能不能写一个有gis的页面，
 			//你们目前vue学的咋样
