@@ -9,8 +9,8 @@ An AI-assisted online geographic information management system was developed wit
   * **TechStack**: java Springboot + Mysql + Redis
   * **Floder**: user-manager
   * **MySQL files**:
-    * initail——database.sql
-    * file——initial.sql
+    * > initail-database.sql
+    * > file-initial.sql
     * Please change Mysql account in the XML files
 * Frontend
   * **Floder**: user-manager-Vue
