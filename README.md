@@ -13,7 +13,7 @@ An AI-assisted online geographic information management system was developed wit
     * file——initial.sql
     * Please change Mysql account in the XML files
 * Frontend
-  * **Floder**: user-manager-Vue 是前
+  * **Floder**: user-manager-Vue
   * **TechStack**: Vue
   * **Guide**:
     * ``` cmd
